@@ -11,7 +11,7 @@ create a sqlite database named 'db.sqlite':
 touch db.sqlite
 ```
 
-create a `.env` that contains secret key for generating JWT tokens
+create a `.env` file that contains secret key for generating JWT tokens
 
 ```shell
 JWT_SECRET=secret
