@@ -1,0 +1,27 @@
+#!/usr/bin/env php
+<?php
+
+use Src\Entities\User;
+use Src\utils\ConsoleInputHelper;
+use Src\utils\PasswordHelper;
+
+require 'bootstrap.php';
+
+$entityManager = GetEntityManager();
+
+try {
+    $name = ConsoleInputHelper::readLine('Enter name: ');
+    $email = ConsoleInputHelper::readLine('Enter email: ');
+    $password = ConsoleInputHelper::readPassword('Enter password: ');
+    
+    $newUser = new User();
+    $newUser->setName($name);
+    $newUser->setEmail($email);
+    $newUser->setPassword(PasswordHelper::hash($password));
+    
+    $entityManager->persist($newUser);
+    $entityManager->flush();
+    echo 'user saved';
+} catch (Exception $e) {
+    echo $e->getMessage();
+}
